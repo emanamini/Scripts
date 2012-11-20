@@ -16,18 +16,19 @@ def main(file_name):
     up = ""
     down = ""
     
-    # translation with id 0 is top of the card and with id 1 is buttom of it.
+    # translation with id 0 is on top of the card and with id 1 is on
+    # buttom of it.
     for elem in tree.iterfind('entries/entry/translation'):
-        # In the previous version I used an astrik sign to ge all
+        # In the previous version I used an astrik sign to get all
         # items in a element. But if there was an element without
         # sound or image that solution would generate brokened out
         # put. In this solution I'll check every item and if they
-        # exists then I'll add them to the output string.
+        # are exists then I'll add them to the output string.
         for item in elem.iterfind('text'):
             if elem.attrib['id'] == '0':
                 up = item.text
             else:
-                down = item.text
+                down = item.text.encode('utf-8')
         if elem.iterfind('sound'):
             for item in elem.iterfind('sound'):
                 up = up + "[sound:" + item.text +"]"
