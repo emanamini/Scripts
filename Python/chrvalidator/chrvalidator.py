@@ -7,7 +7,7 @@ import codecs
 __version__ = "0.1"
 
 def helpMessage():
-    print "Some help message"
+    print "Usage: python chrvalidator.py -i INPUTFILE -[cuUd]"
 
 def main():
     if len(sys.argv) < 2:
