@@ -63,7 +63,7 @@ do
     traffic=$(echo "$Brecived $Btransmited" | awk '{printf( "%.2f", ($1+$2)/1024/1024 )}')
 
     printf \
-	"CPU: %3s,%3s,%3s,%3s | RAM: %sG/%sG (%s%%) | LAN: ↓: %4sƘ ↑: %4sƘ T↕: %6s | %s\n" \
+	"CPU: %3s,%3s,%3s,%3s | RAM: %sG/%sG (%s%%) | LAN: ↓: %4sk ↑: %4sk TD: %6s | %s  \n" \
 	"$cpu0" "$cpu1" "$cpu2" "$cpu3" "$usedMemory" \
 	"$totalMemory" "$memInPercent" "$dlSpeed" \
 	"$upSpeed" "$traffic" "$date"
