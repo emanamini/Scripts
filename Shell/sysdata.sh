@@ -58,18 +58,15 @@ do
 	eval \cpu$COUNT=$DIFF_USAGE
     done
     
-#    dlSpeed=$(echo "scale=2;($Brecived-$oldBRecived)/1024" | bc )
-#    upSpeed=$(echo "scale=2;($Btransmited-$oldBTransmited)/1024" | bc )
     dlSpeed=$(echo $(( $Brecived-$oldBRecived )) | awk '{printf( "%.2f", $1/1024)}')
     upSpeed=$(echo $(( $Btransmited-$oldBTransmited )) | awk '{printf( "%.2f", $1/1024)}')
     traffic=$(echo "$Brecived $Btransmited" | awk '{printf( "%.2f", ($1+$2)/1024/1024 )}')
-    echo "CPU: ${cpu0},${cpu1},${cpu2},${cpu3} | RAM: ${usedMemory}G/${totalMemory}G (${memInPercent}%) | LAN: ↓:${dlSpeed}Ƙ ↑:${upSpeed}Ƙ T↕:${traffic} | $date"
 
-#    printf \
-#	"CPU: %3s,%3s,%3s,%3s | RAM: %sG/%sG (%s%%) | LAN: ↓: %4sƘ ↑: %4sƘ T↕: %6s | %s\n" \
-#	"$cpu0" "$cpu1" "$cpu2" "$cpu3" "$usedMemory" \
-#	"$totalMemory" "$memInPercent" "$dlSpeed" \
-#	"$upSpeed" "$traffic" "$date"
+    printf \
+	"CPU: %3s,%3s,%3s,%3s | RAM: %sG/%sG (%s%%) | LAN: ↓: %4sƘ ↑: %4sƘ T↕: %6s | %s\n" \
+	"$cpu0" "$cpu1" "$cpu2" "$cpu3" "$usedMemory" \
+	"$totalMemory" "$memInPercent" "$dlSpeed" \
+	"$upSpeed" "$traffic" "$date"
     oldBRecived=$Brecived
     oldBTransmited=$Btransmited
     sleep 1
