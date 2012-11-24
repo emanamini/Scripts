@@ -6,9 +6,6 @@ oldBRecived=0
 oldBTransmited=0
 netInterface=/proc/net/dev
 
-# Date and time: Tue 2012.11.06 10:49
-date=$(date +"%a %Y.%m.%d %H:%M")
-
 # FUNCTIONS
 function getRamInfo
 {
@@ -57,6 +54,8 @@ do
 	getCpuInfo $COUNT
 	eval \cpu$COUNT=$DIFF_USAGE
     done
+    # Date and time: Tue 2012.11.06 10:49
+    date=$(date +"%a %Y.%m.%d %H:%M")
     
     dlSpeed=$(echo $(( $Brecived-$oldBRecived )) | awk '{printf( "%.2f", $1/1024)}')
     upSpeed=$(echo $(( $Btransmited-$oldBTransmited )) | awk '{printf( "%.2f", $1/1024)}')
