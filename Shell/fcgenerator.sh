@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# To get more information: http://bit.ly/Td2Y02
 # Translation target:
 TARGETT="fa"
 # Translate from:
@@ -25,14 +25,15 @@ You also can use this options:
    -d <DECKNAME>     Specify Deck name.
    -T <TARGET>       Specify target language. something like en, fa...
    -F <FROM>         Which language the script have to translate from.
-                     default value is auto."
+                     default value is auto.
+    To get more information: http://bit.ly/Td2Y02"
     exit 0
 }
 
 # Dependency check function:
+# I used this function: http://www.snabelb.net/content/bash_support_function_check_dependencies
 function deps(){
-    DEPENDENCIES=$@
-    
+    DEPENDENCIES=$@    
     deps_ok=YES
     for dep in $DEPENDENCIES
     do
@@ -113,6 +114,7 @@ DECKMedia=${DECKNAME}.media
 
 # If the translation didn't pass, find translation on google translation website
 if [ ! "$TRANSLATION" ]; then
+    # I used this script: http://crunchbang.org/forums/viewtopic.php?id=17034
     result=$(curl -s -i --user-agent "" -d "sl=$FROMT" -d "tl=$TARGETT" --data-urlencode "text=$WORD" http://translate.google.com)
     encoding=$(awk '/Content-Type: .* charset=/ {sub(/^.*charset=["'\'']?/,""); sub(/[ "'\''].*$/,""); print}' <<<"$result")
     TRANSLATION=$(iconv -f $encoding <<<"$result" |  awk 'BEGIN {RS="</div>"};/<span[^>]* id=["'\'']?result_box["'\'']?/' | html2text)
@@ -124,6 +126,7 @@ if ! $GEspeak; then
     echo "Sound file generated."
 else
     echo "Downloading the sound file..."
+    # I used this script: https://gist.github.com/873364
     wget -q -U Mozilla -O ${SOUNDF} "${URL}${WORD}"
     echo "Sound file downloaded."
 fi 
